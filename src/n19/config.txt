@@ -1,0 +1,6 @@
+p_ccc=2560-5140-92-1547896525
+p_nif=58748520c
+p_nom= Christian Bartrina
+db_dbName=n19
+db_UserName=root
+db_Password=WAqwerty123
