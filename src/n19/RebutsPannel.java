@@ -36,6 +36,7 @@ public class RebutsPannel extends JPanel {
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("n19PU").createEntityManager();
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Rebuts r");
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
+        deleteButton1 = new javax.swing.JButton();
         masterScrollPane = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
         idSociLabel = new javax.swing.JLabel();
@@ -50,29 +51,32 @@ public class RebutsPannel extends JPanel {
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        deleteButton1 = new javax.swing.JButton();
         deleteButton2 = new javax.swing.JButton();
+        deleteButton3 = new javax.swing.JButton();
 
         FormListener formListener = new FormListener();
 
+        deleteButton1.setText("Norma19");
+        deleteButton1.addActionListener(formListener);
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idSoci}"));
-        columnBinding.setColumnName("Soci");
+        columnBinding.setColumnName("Id Soci");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantitat}"));
         columnBinding.setColumnName("Quantitat");
         columnBinding.setColumnClass(Float.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${data}"));
         columnBinding.setColumnName("Data");
-        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${concepte}"));
         columnBinding.setColumnName("Concepte");
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
+
         masterScrollPane.setViewportView(masterTable);
 
-        idSociLabel.setText("Soci:");
+        idSociLabel.setText("Id Soci:");
 
         quantitatLabel.setText("Quantitat:");
 
@@ -86,14 +90,13 @@ public class RebutsPannel extends JPanel {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), idSociField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.quantitat}"), quantitatField, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.quantitat}"), quantitatField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue(null);
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), quantitatField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.data}"), dataField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        binding.setSourceUnreadableValue(null);
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), dataField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
@@ -120,11 +123,11 @@ public class RebutsPannel extends JPanel {
 
         deleteButton.addActionListener(formListener);
 
-        deleteButton1.setText("Norma19");
-        deleteButton1.addActionListener(formListener);
-
         deleteButton2.setText("Editar Soci");
         deleteButton2.addActionListener(formListener);
+
+        deleteButton3.setText("Norma19");
+        deleteButton3.addActionListener(formListener);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,7 +137,7 @@ public class RebutsPannel extends JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(deleteButton1)
+                        .addComponent(deleteButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -153,11 +156,11 @@ public class RebutsPannel extends JPanel {
                             .addComponent(concepteLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idSociField, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                            .addComponent(quantitatField, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                            .addComponent(dataField, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                            .addComponent(concepteField, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)))
-                    .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE))
+                            .addComponent(idSociField)
+                            .addComponent(quantitatField)
+                            .addComponent(dataField)
+                            .addComponent(concepteField)))
+                    .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -190,8 +193,8 @@ public class RebutsPannel extends JPanel {
                     .addComponent(refreshButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton)
-                    .addComponent(deleteButton1)
-                    .addComponent(deleteButton2))
+                    .addComponent(deleteButton2)
+                    .addComponent(deleteButton3))
                 .addContainerGap())
         );
 
@@ -215,11 +218,14 @@ public class RebutsPannel extends JPanel {
             else if (evt.getSource() == deleteButton) {
                 RebutsPannel.this.deleteButtonActionPerformed(evt);
             }
-            else if (evt.getSource() == deleteButton1) {
-                RebutsPannel.this.deleteButton1ActionPerformed(evt);
-            }
             else if (evt.getSource() == deleteButton2) {
                 RebutsPannel.this.deleteButton2ActionPerformed(evt);
+            }
+            else if (evt.getSource() == deleteButton3) {
+                RebutsPannel.this.deleteButton3ActionPerformed(evt);
+            }
+            else if (evt.getSource() == deleteButton1) {
+                RebutsPannel.this.deleteButton1ActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -274,13 +280,17 @@ public class RebutsPannel extends JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void deleteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButton2ActionPerformed
+
     private void deleteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteButton1ActionPerformed
 
-    private void deleteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton2ActionPerformed
+    private void deleteButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteButton2ActionPerformed
+    }//GEN-LAST:event_deleteButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField concepteField;
@@ -290,6 +300,7 @@ public class RebutsPannel extends JPanel {
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton deleteButton1;
     private javax.swing.JButton deleteButton2;
+    private javax.swing.JButton deleteButton3;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JTextField idSociField;
     private javax.swing.JLabel idSociLabel;

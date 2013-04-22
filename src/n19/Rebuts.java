@@ -7,7 +7,6 @@ package n19;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -51,8 +48,7 @@ public class Rebuts implements Serializable {
     private float quantitat;
     @Basic(optional = false)
     @Column(name = "data")
-    @Temporal(TemporalType.DATE)
-    private Date data;
+    private String data;
     @Basic(optional = false)
     @Column(name = "concepte")
     private String concepte;
@@ -64,7 +60,7 @@ public class Rebuts implements Serializable {
         this.id = id;
     }
 
-    public Rebuts(Integer id, int idSoci, float quantitat, Date data, String concepte) {
+    public Rebuts(Integer id, int idSoci, float quantitat, String data, String concepte) {
         this.id = id;
         this.idSoci = idSoci;
         this.quantitat = quantitat;
@@ -102,12 +98,12 @@ public class Rebuts implements Serializable {
         changeSupport.firePropertyChange("quantitat", oldQuantitat, quantitat);
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
-        Date oldData = this.data;
+    public void setData(String data) {
+        String oldData = this.data;
         this.data = data;
         changeSupport.firePropertyChange("data", oldData, data);
     }
