@@ -267,7 +267,7 @@
         <Property name="text" type="java.lang.String" value="Elimina"/>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="deleteButton" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="deleteButton" targetPath="enabled" updateStrategy="0" immediately="false"/>
       </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
@@ -281,6 +281,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar Soci"/>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="deleteButton2" targetPath="enabled" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButton2ActionPerformed"/>
       </Events>

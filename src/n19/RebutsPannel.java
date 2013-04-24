@@ -118,12 +118,16 @@ public class RebutsPannel extends JPanel {
 
         deleteButton.setText("Elimina");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         deleteButton.addActionListener(formListener);
 
         deleteButton2.setText("Editar Soci");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         deleteButton2.addActionListener(formListener);
 
         deleteButton3.setText("Norma19");
@@ -230,7 +234,12 @@ public class RebutsPannel extends JPanel {
         }
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void loadForm(String title, JPanel formulari){
+        JFrame f1 = new JFrame(title);
+        f1.setSize(471, 500);
+        f1.getContentPane().add(formulari);
+        f1.setVisible(true);    
+    }      
 
     @SuppressWarnings("unchecked")
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
@@ -281,7 +290,9 @@ public class RebutsPannel extends JPanel {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void deleteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton2ActionPerformed
-        // TODO add your handling code here:
+        int[] selected = masterTable.getSelectedRows();
+        int soci = (int)masterTable.getValueAt(selected[0],0 );
+        loadForm("Clients", new ClientsPannel(soci)); 
     }//GEN-LAST:event_deleteButton2ActionPerformed
 
     private void deleteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton1ActionPerformed

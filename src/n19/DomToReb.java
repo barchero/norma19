@@ -10,9 +10,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -68,7 +72,67 @@ public class DomToReb {
             
         }
     
-     public void inputData(String values[]) throws SQLException{
+     private boolean getLastReb(int soci, Connection con) throws ParseException, SQLException{
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat sdf_now = new SimpleDateFormat("yyyy-MM-dd");
+        now.add(now.MONTH,1);//january == 0
+        String nowDate = now.get(Calendar.YEAR)+"-"+now.get(Calendar.MONTH)+"-"+now.get(Calendar.DATE);
+        now.setTime(sdf_now.parse(nowDate));
+        Date dateNow = now.getTime();
+
+
+        /*ficar en un mètode apart*/
+        Statement select1 = con.createStatement();
+        ResultSet result = select1.executeQuery("SELECT periodicitat FROM domiciliacions WHERE id_soci="+soci);
+        result.next();
+        String periodicitat = result.getString(1);
+
+        ResultSet rebuts = select1.executeQuery("SELECT data FROM rebuts WHERE id_soci="+soci+" ORDER BY id DESC");
+        if(rebuts.next()){
+            String val = rebuts.getString(1);   
+            SimpleDateFormat sdf_lastReb = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar c = Calendar.getInstance();
+            c.setTime(sdf_lastReb.parse(val));
+            //'DIARI','SETMANAL','MENSUAL','BIMENSUAL','TRIMESTRAL','SEMESTRAL','ANUAL'
+            switch(periodicitat){
+                case "DIARI":
+                    c.add(c.DATE,1);
+                    break;
+                case "SETMANAL":
+                    c.add(c.DATE,7);
+                    break;
+                case "MENSUAL":
+                    c.add(c.MONTH, 1);
+                    break;
+                case "BIMENSUAL":
+                    c.add(c.MONTH, 2);
+                    break;
+                case "TRIMESTRAL":
+                    c.add(c.MONTH, 3);
+                    break;
+                case "SEMESTRAL":
+                    c.add(c.MONTH, 6);
+                    break;
+                case "ANUAL":
+                    c.add(c.YEAR, 1);
+                    break;
+                default:
+                    c.add(c.MONTH, 1);
+                    break;
+            }
+            Date lastReb = c.getTime();    
+            String lDate = sdf_lastReb.format(lastReb);
+            String dNow = sdf_lastReb.format(dateNow);
+            if(dateNow.after(lastReb)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
+        }
+     }
+     public void inputData(String values[]) throws SQLException, ParseException{
          Date date = new Date();
          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
          String dateNow = sdf.format(date.getTime());
@@ -85,7 +149,10 @@ public class DomToReb {
         try{
             Connection con = this.MySQLConnect();
             stmt = con.createStatement();
-            stmt.executeUpdate(DDLCrearTabla);
+            if(getLastReb(Integer.parseInt(values[0]),con)){                
+                stmt.executeUpdate(DDLCrearTabla);                
+            }
+
         }
         catch (SQLException e) {
             printSQLException(e);
