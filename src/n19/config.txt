@@ -1,6 +1,9 @@
-p_ccc=2560-5140-92-1547896525
+p_entidad=2560
+p_oficina=5140
+p_dc=92
+p_cuenta=1547896525
 p_nif=58748520c
-p_nom= Christian Bartrina
+p_nom=Christian Bartrina
 db_dbName=n19
 db_UserName=root
 db_Password=WAqwerty123

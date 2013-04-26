@@ -6,8 +6,12 @@ package n19;
 
 import java.awt.EventQueue;
 import java.beans.Beans;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.RollbackException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -300,7 +304,17 @@ public class RebutsPannel extends JPanel {
     }//GEN-LAST:event_deleteButton1ActionPerformed
 
     private void deleteButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButton3ActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Integer> values = new ArrayList<Integer>();
+        for(int i = 0; i<masterTable.getRowCount(); i++){
+            values.add((Integer)masterTable.getValueAt(i,0));
+        }        
+        try {
+            new norma19(values);
+        } catch (SQLException ex) {
+            Logger.getLogger(RebutsPannel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(RebutsPannel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_deleteButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
