@@ -6,6 +6,7 @@ package n19;
 
 import java.awt.EventQueue;
 import java.beans.Beans;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -308,13 +309,16 @@ public class RebutsPannel extends JPanel {
         for(int i = 0; i<masterTable.getRowCount(); i++){
             values.add((Integer)masterTable.getValueAt(i,0));
         }        
-        try {
+        try {        
             new norma19(values);
         } catch (SQLException ex) {
             Logger.getLogger(RebutsPannel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(RebutsPannel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(RebutsPannel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_deleteButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

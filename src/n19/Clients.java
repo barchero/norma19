@@ -29,6 +29,7 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Clients.findById", query = "SELECT c FROM Clients c WHERE c.id = :id"),
     @NamedQuery(name = "Clients.findByNom", query = "SELECT c FROM Clients c WHERE c.nom = :nom"),
     @NamedQuery(name = "Clients.findByCognoms", query = "SELECT c FROM Clients c WHERE c.cognoms = :cognoms"),
+    @NamedQuery(name = "Clients.findByNif", query = "SELECT c FROM Clients c WHERE c.nif = :nif"),
     @NamedQuery(name = "Clients.findByCcc", query = "SELECT c FROM Clients c WHERE c.ccc = :ccc")})
 public class Clients implements Serializable {
     @Transient
@@ -46,6 +47,9 @@ public class Clients implements Serializable {
     @Column(name = "cognoms")
     private String cognoms;
     @Basic(optional = false)
+    @Column(name = "nif")
+    private String nif;
+    @Basic(optional = false)
     @Column(name = "ccc")
     private String ccc;
 
@@ -56,10 +60,11 @@ public class Clients implements Serializable {
         this.id = id;
     }
 
-    public Clients(Integer id, String nom, String cognoms, String ccc) {
+    public Clients(Integer id, String nom, String cognoms, String nif, String ccc) {
         this.id = id;
         this.nom = nom;
         this.cognoms = cognoms;
+        this.nif = nif;
         this.ccc = ccc;
     }
 
@@ -91,6 +96,16 @@ public class Clients implements Serializable {
         String oldCognoms = this.cognoms;
         this.cognoms = cognoms;
         changeSupport.firePropertyChange("cognoms", oldCognoms, cognoms);
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public void setNif(String nif) {
+        String oldNif = this.nif;
+        this.nif = nif;
+        changeSupport.firePropertyChange("nif", oldNif, nif);
     }
 
     public String getCcc() {

@@ -14,6 +14,7 @@
   <persistence-unit name="n19PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>n19.Rebuts</class>
+    <class>n19.Clients</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/n19"/>
       <property name="javax.persistence.jdbc.password" value="WAqwerty123"/>

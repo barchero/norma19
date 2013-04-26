@@ -35,6 +35,9 @@ public class norma19 {
         try{
             if (!fc.exists()){
               fc.createNewFile();
+            }else{
+                fc.delete();
+                fc.createNewFile();
             }
             
             FileWriter br = new FileWriter(fc);

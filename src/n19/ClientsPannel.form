@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
-        <Property name="persistenceUnit" type="java.lang.String" value="n19?zeroDateTimeBehavior=convertToNullPU"/>
+        <Property name="persistenceUnit" type="java.lang.String" value="n19PU"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
@@ -37,11 +37,6 @@
       </AuxValues>
     </Component>
   </NonVisualComponents>
-  <Properties>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[471, 471]"/>
-    </Property>
-  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -71,22 +66,24 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="masterScrollPane" pref="451" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="nomLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="cognomsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nifLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="cccLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nomLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nomField1" max="32767" attributes="0"/>
-                                  <Component id="nomField" alignment="0" pref="399" max="32767" attributes="0"/>
-                                  <Component id="cognomsField" alignment="0" pref="399" max="32767" attributes="0"/>
-                                  <Component id="cccField" alignment="0" pref="399" max="32767" attributes="0"/>
+                                  <Component id="idField" alignment="0" pref="315" max="32767" attributes="0"/>
+                                  <Component id="nomField" alignment="0" pref="315" max="32767" attributes="0"/>
+                                  <Component id="cognomsField" alignment="0" pref="315" max="32767" attributes="0"/>
+                                  <Component id="nifField" alignment="0" pref="315" max="32767" attributes="0"/>
+                                  <Component id="cccField" alignment="0" pref="315" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="masterScrollPane" pref="380" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -98,13 +95,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="masterScrollPane" pref="345" max="32767" attributes="0"/>
+              <Component id="masterScrollPane" pref="130" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nomLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nomField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nomLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nomField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,6 +110,11 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cognomsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cognomsField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nifLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nifField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -163,10 +165,12 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -174,7 +178,6 @@
           </Properties>
           <BindingProperties>
             <BindingProperty name="elements" source="list" target="masterTable" targetPath="elements" updateStrategy="0" immediately="true">
-              <Property name="name" type="java.lang.String" value=""/>
               <Subbinding sourcePath="${id}">
                 <BindingParameter name="NAME" value="Soci"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
@@ -185,6 +188,10 @@
               </Subbinding>
               <Subbinding sourcePath="${cognoms}">
                 <BindingParameter name="NAME" value="Cognoms"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${nif}">
+                <BindingParameter name="NAME" value="Nif"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${ccc}">
@@ -200,6 +207,11 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="idLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Soci:"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="nomLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nom:"/>
@@ -210,15 +222,30 @@
         <Property name="text" type="java.lang.String" value="Cognoms:"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="nifLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nif:"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="cccLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ccc:"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="idField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.id}" target="idField" targetPath="text" updateStrategy="0" immediately="false">
+          <Property name="incompletePathValue" type="java.lang.String" value="null"/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="idField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
     <Component class="javax.swing.JTextField" name="nomField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.nom}" target="nomField" targetPath="text" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nomField" targetPath="enabled" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.nom}" target="nomField" targetPath="text" updateStrategy="0" immediately="false">
+          <Property name="incompletePathValue" type="java.lang.String" value="null"/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nomField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="cognomsField">
@@ -227,6 +254,14 @@
           <Property name="incompletePathValue" type="java.lang.String" value="null"/>
         </BindingProperty>
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="cognomsField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nifField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.nif}" target="nifField" targetPath="text" updateStrategy="0" immediately="false">
+          <Property name="incompletePathValue" type="java.lang.String" value="null"/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nifField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="cccField">
@@ -287,20 +322,6 @@
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="nomLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Soci:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="nomField1">
-      <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.id}" target="nomField1" targetPath="text" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nomField1" targetPath="enabled" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomField1ActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
